@@ -1,0 +1,33 @@
+[package]
+name = "stream-replay"
+version = "0.1.0"
+edition = "2021"
+
+[[bin]]
+name = "stream-replay"
+path = "src/main.rs"
+
+[lib]
+name = "replay"
+crate-type = ["cdylib"]
+
+[dependencies]
+rand = "0.8.5"
+serde_json = "1.0"
+ndarray = "0.15"
+ndarray-npy = "0.8"
+clap = { version = "3.2.20", features = ["derive"] }
+spin_sleep = "1.0"
+pyo3 = { version = "0.18.2", features = ["extension-module"] }
+
+[dependencies.serde]
+version = "1.0"
+features = ["derive"]
+
+[target.'cfg(unix)'.dependencies]
+libc = "0.2"
+
+[target.'cfg(windows)'.dependencies.windows]
+version = "0.46"
+features=[ "Win32_System_IO", "Win32_Foundation", "Win32_Networking_WinSock", "Win32_NetworkManagement_QoS",
+            "Win32_System_Diagnostics_Debug"]

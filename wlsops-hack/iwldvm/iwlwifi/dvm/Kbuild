@@ -1,0 +1,14 @@
+# SPDX-License-Identifier: GPL-2.0
+# DVM
+obj-m	+= iwldvm.o
+iwldvm-y		+= main.o rs.o mac80211.o ucode.o tx.o
+iwldvm-y		+= lib.o calib.o tt.o sta.o rx.o
+
+iwldvm-y		+= power.o
+iwldvm-y		+= scan.o
+iwldvm-y		+= rxon.o devices.o
+
+iwldvm-y += led.o
+iwldvm-y += debugfs.o
+
+ccflags-y += -I $(src)/..

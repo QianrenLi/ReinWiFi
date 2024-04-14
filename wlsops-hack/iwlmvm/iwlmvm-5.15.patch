@@ -1,0 +1,44 @@
+diff --git a/mvm/Kbuild b/mvm/Kbuild
+new file mode 100644
+index 0000000..d518980
+--- /dev/null
++++ b/mvm/Kbuild
+@@ -0,0 +1,14 @@
++# SPDX-License-Identifier: GPL-2.0
++obj-m   += iwlmvm.o
++iwlmvm-y += fw.o mac80211.o nvm.o ops.o phy-ctxt.o mac-ctxt.o
++iwlmvm-y += utils.o rx.o rxmq.o tx.o binding.o quota.o sta.o sf.o
++iwlmvm-y += scan.o time-event.o rs.o rs-fw.o
++iwlmvm-y += power.o coex.o
++iwlmvm-y += tt.o offloading.o tdls.o
++iwlmvm-y += ftm-responder.o ftm-initiator.o
++iwlmvm-y += rfi.o
++iwlmvm-y += debugfs.o debugfs-vif.o
++iwlmvm-y += led.o
++iwlmvm-y += d3.o
++
++ccflags-y += -I $(src)/..
+\ No newline at end of file
+diff --git a/mvm/mac80211.c b/mvm/mac80211.c
+index 3a45852..34a66bb 100644
+--- a/mvm/mac80211.c
++++ b/mvm/mac80211.c
+@@ -3300,12 +3300,17 @@ static int iwl_mvm_mac_conf_tx(struct ieee80211_hw *hw,
+ 	 * No need to update right away, we'll get BSS_CHANGED_QOS
+ 	 * The exception is P2P_DEVICE interface which needs immediate update.
+ 	 */
+-	if (vif->type == NL80211_IFTYPE_P2P_DEVICE) {
++	// if (vif->type == NL80211_IFTYPE_P2P_DEVICE) {
++	//NOTE: always update instantly
++	{
+ 		int ret;
+ 
+ 		mutex_lock(&mvm->mutex);
+ 		ret = iwl_mvm_mac_ctxt_changed(mvm, vif, false, NULL);
+ 		mutex_unlock(&mvm->mutex);
++
++		printk("iwl_mvm_mac_conf_tx: AC-%d: (%d, [%d, %d]); %d\n", \
++			ac, params->aifs, params->cw_min, params->cw_max, ret);
+ 		return ret;
+ 	}
+ 	return 0;

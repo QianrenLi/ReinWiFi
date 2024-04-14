@@ -1,0 +1,9 @@
+scenario: 6
+# model: /ifModelS2
+# model: /ifModelS2
+# model: /ifModel_1-back ## 2 fc2 layer
+# model: /ifModel_test ## 2 fc2 layer
+model: /model ## 2 fc2 layer
+# model: /noIfModel_2
+ctlModelFolder: '/training/server_data'
+# train

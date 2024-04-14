@@ -1,0 +1,66 @@
+diff --git a/dvm/Kbuild b/dvm/Kbuild
+new file mode 100644
+index 0000000..21a3572
+--- /dev/null
++++ b/dvm/Kbuild
+@@ -0,0 +1,14 @@
++# SPDX-License-Identifier: GPL-2.0
++# DVM
++obj-m	+= iwldvm.o
++iwldvm-y		+= main.o rs.o mac80211.o ucode.o tx.o
++iwldvm-y		+= lib.o calib.o tt.o sta.o rx.o
++
++iwldvm-y		+= power.o
++iwldvm-y		+= scan.o
++iwldvm-y		+= rxon.o devices.o
++
++iwldvm-y += led.o
++iwldvm-y += debugfs.o
++
++ccflags-y += -I $(src)/..
+diff --git a/dvm/mac80211.c b/dvm/mac80211.c
+index 75e7665..427b8fa 100644
+--- a/dvm/mac80211.c
++++ b/dvm/mac80211.c
+@@ -1165,7 +1165,7 @@ static int iwlagn_mac_conf_tx(struct ieee80211_hw *hw,
+ 	struct iwl_vif_priv *vif_priv = (void *)vif->drv_priv;
+ 	struct iwl_rxon_context *ctx = vif_priv->ctx;
+ 	int q;
+-
++	int ret; // added for immediate write
+ 	if (WARN_ON(!ctx))
+ 		return -EINVAL;
+ 
+@@ -1195,6 +1195,32 @@ static int iwlagn_mac_conf_tx(struct ieee80211_hw *hw,
+ 
+ 	ctx->qos_data.def_qos_parm.ac[q].reserved1 = 0;
+ 
++
++	// add immediate update from the rxon.c
++
++	// if (!ctx->is_active)
++	// 	return 0;
++
++	ctx->qos_data.def_qos_parm.qos_flags = 0;
++
++	if (ctx->qos_data.qos_active)
++		ctx->qos_data.def_qos_parm.qos_flags |=
++			QOS_PARAM_FLG_UPDATE_EDCA_MSK;
++
++	if (ctx->ht.enabled)
++		ctx->qos_data.def_qos_parm.qos_flags |= QOS_PARAM_FLG_TGN_MSK;
++
++	IWL_DEBUG_INFO(priv, "send QoS cmd with Qos active=%d FLAGS=0x%X\n",
++		      ctx->qos_data.qos_active,
++		      ctx->qos_data.def_qos_parm.qos_flags);
++
++	ret = iwl_dvm_send_cmd_pdu(priv, ctx->qos_cmd, 1,
++			       sizeof(struct iwl_qosparam_cmd),
++			       &ctx->qos_data.def_qos_parm);
++	if (ret)
++		IWL_DEBUG_QUIET_RFKILL(priv, "Failed to update QoS\n");
++	
++	// endof updating
+ 	mutex_unlock(&priv->mutex);
+ 
+ 	IWL_DEBUG_MAC80211(priv, "leave\n");

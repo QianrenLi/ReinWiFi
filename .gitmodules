@@ -1,0 +1,7 @@
+[submodule "wlsops-hack"]
+	path = wlsops-hack
+	url = https://github.com/QianrenLi/wlsops-hack.git
+	branch = 8812au
+[submodule "stream-replay"]
+	path = stream-replay
+	url = https://github.com/lasso-sustech/stream-replay.git

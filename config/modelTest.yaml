@@ -1,0 +1,18 @@
+scenario: 3
+# model: /ifModelS2.v.0.2
+# model: /ifModelS2
+# model: /ifModel_1_test2 ## 2 fc2 layer
+# model: /ifModel-test ## 2 fc2 layer
+# model: /ifModel_2 ## 2 fc2 layer
+# model: /ifModel_1 ## 2 fc2 layer
+# model: /noIfModel_2
+# model: /ifModelS1 ## 2 fc2 layer
+# model: /ifModel_test ## 2 fc2 layer
+# model: /ifModelS_long_ep ## 2 fc2 layer
+# model: /ifIdxModel_2 ## 2 fc2 layer
+# model: /nonIfIdxModelwithStateNoise ## 2 fc2 layer
+# model: /nonIfIdxModelwithOrder ## 2 fc2 layer
+model: /nonIfIdxModelwithOrderandNoise ## 2 fc2 layer
+ctlModelFolder: '/training/model'
+rttLogFolder: 'rttLog'
+test
