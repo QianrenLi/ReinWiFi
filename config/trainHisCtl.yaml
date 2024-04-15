@@ -1,9 +1,5 @@
-scenario: [2]
-model: '/nonIfIdxModelwithOrderandNoise'
-ctlModelFolder: '/training/model/controller'
-model-paths: ["training/model/model_s1/env_s1_1.pt","training/model/model_s1/env_s1_2.pt","training/model/model_s1/env_s1_3.pt","training/model/model_s2/env_s2_1.pt","training/model/model_s2/env_s2_2.pt","training/model/model_s2/env_s2_3.pt","training/model/model_s3/env_s3_1.pt", "training/model/model_s3/env_s3_2.pt","training/model/model_s3/env_s3_3.pt","training/model/model_s4/env_s4_1.pt", "training/model/model_s4/env_s4_2.pt","training/model/model_s4/env_s4_3.pt","training/model/model_s5/env_s5_1.pt", "training/model/model_s5/env_s5_2.pt","training/model/model_s5/env_s5_3.pt"]
+model: '/model' # model name
+ctlModelFolder: '/training/model/controller' # Path to save the trained model
+model-paths: ["path1","path2"] # Path to the imitator model
 
 trainController
-# cw-interference
-# noInterference
-# test

@@ -1,9 +1,4 @@
-scenario: 6
-# model: /ifModelS2
-# model: /ifModelS2
-# model: /ifModel_1-back ## 2 fc2 layer
-# model: /ifModel_test ## 2 fc2 layer
-model: /model ## 2 fc2 layer
-# model: /noIfModel_2
-ctlModelFolder: '/training/server_data'
+scenario: 6 # Scenario number
+model: /model # model name
+ctlModelFolder: '/training/model' # Path to the folder where the model will be 
 # train
