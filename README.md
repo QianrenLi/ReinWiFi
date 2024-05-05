@@ -7,7 +7,9 @@ A reninfocement-learning-based application-layer QoS optimization framework of W
 This is the code repository for the ReinWiFi project. The project aims to optimize the application-layer QoS of WiFi networks using Reinforcement Learning (RL) techniques. The project is developed in Python and uses the [PyTorch](https://pytorch.org/) library for the RL implementation. The project is still in its early stages and is under development.
 
 The controller is specifically designed to handle the application-layer QoS of the WiFi network as following shows.
-![controller](./figs/network.png "controller")
+<p align="center">
+<img src="./figs/network.png" alt="controller" style="width:500px;"/>
+</p>
 
 ## Usage
 
@@ -39,6 +41,18 @@ Online Training for controller:
 ```bash
 python main.py --config config/modelTrain.yaml
 ```
+
+## Performance
+
+### Control Example
+
+<p align="center">
+<img src="./figs/action_line_example.png" alt="Control Example" style="width:500px;"/>
+</p>
+
+<!-- 
+### Performance
+![Performance](./figs/performance.png "Performance") -->
 
 ## TODO List
 

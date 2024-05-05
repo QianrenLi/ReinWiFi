@@ -302,22 +302,10 @@ class wlanRLController(RLController):
                         _control = {}
                         if action_idx[idx] != -1:
                             for _idx, action_name in enumerate(["cw", "aifs"]):
-                                # if self.is_action_threshold and is_state_reach_maximum:
-                                #     self.graph.info_graph[device_name][link_name][
-                                #         stream_name
-                                #     ].update({action_name: 1})
-                                #     _control.update({action_name: 1})
-                                # else:
                                 self.graph.info_graph[device_name][link_name][
                                     stream_name
                                 ].update({action_name: action[idx + _idx]})
                                 _control.update({action_name: action[idx + _idx]})
-                                # if self.is_action_threshold and is_state_reach_maximum:
-                                #     self.graph.info_graph[device_name][link_name][
-                                #         stream_name
-                                #     ].update({action_name: 1})
-                                #     _control.update({action_name: 1})
-                                # else:
                                 self.graph.info_graph[device_name][link_name][
                                     stream_name
                                 ].update({action_name: action[idx + _idx]})
@@ -337,15 +325,6 @@ class wlanRLController(RLController):
                         elif not self.is_sorted:
                             idx += self.agent_action_num
                     else:
-                        # if self.is_action_threshold and is_state_reach_maximum:
-                        #     control.update({"fraction": 0.1}) if self.active_action[
-                        #         0
-                        #     ] != -1 else None
-                        #     self.graph.info_graph[device_name][link_name][
-                        #         stream_name
-                        #     ].update({"fraction": 0.1})
-                        #     action_idx = np.zeros(len(action_idx))
-                        # else:
                         next_action = action[0]
                         self.graph.info_graph[device_name][link_name][
                             stream_name
